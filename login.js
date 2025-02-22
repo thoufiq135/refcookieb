@@ -18,7 +18,7 @@ login.post("/",(req,res)=>{
     const {Email,Password}=req.body
     console.log(Email,Password)
     const payload={Email:Email,Password:Password}
-    const token=jwt.sign(payload,process.env.Key)
+    const token=jwt.sign(payload,process.env.KEY)
     console.log(token)
     res.cookie("token",token,{httpOnly:true,secure:true,sameSite:"none"}).status(200).json({message:"cookie set"})
 })
