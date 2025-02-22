@@ -20,6 +20,6 @@ login.post("/",(req,res)=>{
     const payload={Email:Email,Password:Password}
     const token=jwt.sign(payload,process.env.Key)
     console.log(token)
-    res.cookie("token",token).status(200).json({message:"cookie set"})
+    res.cookie("token",token,{httpOnly:true,secure:true,sameSite:"none"}).status(200).json({message:"cookie set"})
 })
 module.exports=login;

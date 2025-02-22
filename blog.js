@@ -48,4 +48,17 @@ blog.post("/",async(req,res)=>{
    }
     
 })
+blog.get("/", async (req, res) => {
+    try {
+        const user = req.user;
+
+        // ✅ Fetch user-specific posts
+        const posts = await Post.find({ user: user._id }).populate("user");
+
+        res.status(200).json(posts);
+    } catch (e) {
+        console.log("Error fetching posts:", e);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
 module.exports=blog;
