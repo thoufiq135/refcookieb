@@ -14,16 +14,12 @@ app.use(cors({
     origin:"https://refcookief-f1.vercel.app",
     credentials:true
 }))
-
-
-
-
 require('dotenv').config()
 app.use("/Signup",sign)
 app.use("/Login",login)
 app.use("/Blog",blog)
 app.get("/",(req,res)=>{
-    res.cookie("to","hii",{httpOnly:true,secure:true,sameSite:"none"}).send("<h1>Hello world</h1>")
+    res.cookie("to","hii",{httpOnly:true,secure:true,sameSite:"none",domain: "refcookief-f1.vercel.app" }).send("<h1>Hello world</h1>")
 
 })
 app.listen(port,()=>{
