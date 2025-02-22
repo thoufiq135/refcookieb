@@ -7,9 +7,9 @@ login.use(async(req,res,next)=>{
     const {Email,Password}=req.body    
     const exists=await User.findOne({Email})
     if(!exists){
-        res.status(401).json({message:"User not exists!"})
+        return res.status(401).json({message:"User not exists!"})
     }else if(exists.Password!==Password){
-        res.status(404).json({message:"Wromg password!"})
+       return res.status(404).json({message:"Wromg password!"})
     }else{
         next()
     }
