@@ -2,6 +2,7 @@ const express=require("express")
 const blog=express.Router()
 const {User,Post}=require("./mongo.js")
 const jwt=require("jsonwebtoken")
+const { model } = require("mongoose")
 require("dotenv").config()
 blog.use(async(req,res,next)=>{
     try{
@@ -48,14 +49,13 @@ blog.post("/",async(req,res)=>{
    }
     
 })
-blog.get("/", async (req, res) => {
+blog.get("/All", async (req, res) => {
     try {
-        const user = req.user;
-
-        // ✅ Fetch user-specific posts
-        const posts = await Post.find({ user: user._id }).populate("user");
-
-        res.status(200).json(posts);
+        const data=await Post.find({__v:0}).populate("user")
+        
+       
+        res.status(200).json(data)
+   
     } catch (e) {
         console.log("Error fetching posts:", e);
         res.status(500).json({ message: "Internal Server Error" });
